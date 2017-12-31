@@ -16,7 +16,6 @@ app.use(morgan('dev'));
 // use body parser to parse the request body to json and insert into the req.body attribute
 app.use(bodyparser.json());
 
-
 // now serving api endpoints, api all executed first and for all requests
 app.all('/dishes', (req, res, next) => {
     res.statusCode = '200';
@@ -68,9 +67,6 @@ app.delete('/dishes/:dishid', (req, res, next) => {
     res.end('Deleting dish:'+req.params.dishid);
 });
 
-
-
-// REST API using express router
 
 
 // serving html files using express
