@@ -1,0 +1,16 @@
+{
+  "name": "node_http_module_example",
+  "version": "1.0.0",
+  "description": "node http module example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "keywords": [
+    "node",
+    "http-module"
+  ],
+  "author": "Mukul Sharma",
+  "license": "ISC",
+}
