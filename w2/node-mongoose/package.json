@@ -1,0 +1,20 @@
+{
+  "name": "npm-mongoose",
+  "version": "1.0.0",
+  "description": "Building node application in which we are using mongoose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "keywords": [
+    "node",
+    "mongoose"
+  ],
+  "author": "Mukul Sharma",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "mongoose": "^4.13.9"
+  }
+}
