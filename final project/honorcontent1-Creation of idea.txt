@@ -1,0 +1,11 @@
+Tilte :Expense tracker telegram both with a web based dashboard 
+
+
+Set of features:
+1. Allow users to create categories
+2. Allow users to input expenses daily/periodic
+
+
+Similar projects:-
+1. moneymanagement app
+	// Explore this
