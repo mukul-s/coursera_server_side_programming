@@ -2,6 +2,7 @@
 
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
+const dbOperations = require("./operation");
 
 // conFusion is our mongoserver(database)
 const url = 'mongodb://localhost:27017/conFusion';
@@ -26,25 +27,33 @@ MongoClient.connect(url, (err, client) => {
     });
      */
     const conFusionDb = client.db('conFusion');
-    const dishCollection = conFusionDb.collection('dishes');
 
-    dishCollection.insertOne({"name":"kheech", "description":"Really tasty"},
-        (err, result) => {
-        assert.equal(err, null);
-        console.log("Succssfully inserted");
-        console.log(result.ops);
+    dbOperations.insertDocument(conFusionDb, {'name':'panipuri', 'description': 'really good'},
+            "dishes", (result) => {
+        console.log("Inserted document:\n " , result.ops);
 
-        dishCollection.find({}).toArray((err, docs) => {
-            assert.equal(err, null);
-            console.log("Found :");
-            console.log(docs);
+        dbOperations.findDocuments(conFusionDb, "dishes", (docs) => {
+            console.log("Found documents:\n " , docs); 
+               
+            dbOperations.updateDocument(conFusionDb, {'name':'panipuri'}, {'description': 'five stars'},"dishes",
+                   (result) => {
+                console.log("Documents updated:\n" , result.result); 
 
-            conFusionDb.dropCollection("dishes", (err, result) => {
-                assert.equal(err, null);
-                client.close();
-            })
+                dbOperations.findDocuments(conFusionDb, "dishes", (docs) => {
+                    console.log("Found updated documents:\n " , docs); 
+                        
+                    dbOperations.removeDocument(conFusionDb,{'name':'panipuri'},
+                     "dishes", (result) => {
+                        console.log("Deleted the document\n", result);
+
+                        conFusionDb.dropCollection("dishes", (result) => {
+                            console.log("Dropped collection: \n", result);
+                            client.close();
+                        });
+                    });
+                });
+            });
         });
-        
     });
 });
 
