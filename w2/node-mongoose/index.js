@@ -12,18 +12,36 @@ connect.then((db) => {
     console.log("Connected to the server");
 
     var newDish = Dishes.create({
-        name : 'dabeli',
+        name : 'dabeli6',
         description: 'very similar to a burger'
     })
     .then((dish) => {
         console.log(dish);
-        return Dishes.find({}).exec();
+
+        return Dishes.findByIdAndUpdate(dish._id, {
+            $set: {description: 'i liked it better though'}
+        }, {
+            new: true
+        })
+        .exec();
     })
-    .then((dishes) => {
-        console.log(dishes);
+    .then((dish) => {
+        console.log(dish);
+
+        dish.comments.push({
+            rating: 5,
+            comment: 'i am pulling an all nighter',
+            author: 'Mukul'
+        });
+
+        return dish.save();
+    })
+    .then((dish) => {
+        console.log(dish);
+
         return db.collection('dishes').drop();
     })
-    .then((dishes) => {
+    .then(() => {
         return db.close();
     })
     .catch((err) => {

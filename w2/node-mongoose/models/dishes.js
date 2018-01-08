@@ -3,6 +3,25 @@ const Schema = mongoose.Schema;
 
 
 // building a model
+var commentSchema = new Schema({
+    rating : {
+        type: Number,
+        min: 1,
+        max: 5,
+        required: true,
+
+        
+    },
+    author: {
+        type: String,
+        required: true
+    },
+}, 
+{usePushEach: true},
+{
+    timestamps: true
+});
+
 var dishSchema = new Schema({
     name: {
         type: String,
@@ -12,8 +31,11 @@ var dishSchema = new Schema({
     description: {
         type: String,
         required: true
-    }
-}, {
+    },
+    comments: [commentSchema]
+}, 
+{usePushEach: true},
+{
     timestamps: true
 });
 
